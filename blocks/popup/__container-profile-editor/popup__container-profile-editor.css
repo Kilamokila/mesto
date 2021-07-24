@@ -1,0 +1,16 @@
+.popup__container-profile-editor {
+    width: 430px;
+    height: 330px;
+    background-color: #fff;
+    border-radius: 10px;
+    align-self: flex-end;
+    display: flex;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 490px) {
+    .popup__container-profile-editor {
+        width: 282px;
+        height: 322px;
+    }
+  }

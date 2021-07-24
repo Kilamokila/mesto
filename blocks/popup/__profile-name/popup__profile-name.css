@@ -1,0 +1,6 @@
+.popup__profile-name {
+    min-width: 358px;
+    min-height: 27px;
+    margin: 0 auto 30px;
+    border-bottom: 1px solid #545454;
+}

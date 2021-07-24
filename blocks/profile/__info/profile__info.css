@@ -1,0 +1,18 @@
+.profile__info{
+    display: grid;
+    gap: 16px 18px;
+    max-width: 336px;
+    max-height: 73px;
+    grid-template-columns: repeat(2, auto);
+    grid-template-rows: repeat(2, auto);
+    grid-template-areas:
+        "name button"
+        "discription .";
+}
+
+@media screen and (max-width: 490px) {
+    .profile__info {
+        gap: 14px 10px;
+        margin-bottom: 36px;
+    }
+  }

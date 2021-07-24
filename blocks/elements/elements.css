@@ -1,0 +1,34 @@
+.elements{
+    display: grid;
+    gap: 20px 17px;
+    margin-bottom: 66px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, auto);
+    grid-template-areas:
+        "card card card"
+        "card card card";
+}
+
+@media screen and (max-width: 690px) {
+    .elements{
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-areas: 
+        "card card"
+        "card card"
+        "card card";
+    }
+  }
+
+@media screen and (max-width: 490px) {
+    .elements{
+        margin-bottom: 48px;
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-areas: 
+        "card"
+        "card"
+        "card"
+        "card"
+        "card"
+        "card";
+    }
+  }

@@ -1,0 +1,5 @@
+.elements__card-image {
+    background-size: contain;
+    background-repeat: no-repeat;
+    border-radius: 10px 10px 0 0;
+}

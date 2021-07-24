@@ -1,0 +1,6 @@
+.elements__card-description{
+    max-width: 246px;
+    margin: 20px auto 0;
+    display: flex;
+    justify-content: space-between;
+}
