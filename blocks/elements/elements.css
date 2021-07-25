@@ -9,9 +9,10 @@
         "card card card";
 }
 
-@media screen and (max-width: 690px) {
+@media screen and (max-width: 900px) {
     .elements{
-        grid-template-columns: repeat(2, 1fr);
+        justify-content: center;
+        grid-template-columns: repeat(2, minmax(min-content, max-content));
         grid-template-areas: 
         "card card"
         "card card"
@@ -19,10 +20,10 @@
     }
   }
 
-@media screen and (max-width: 490px) {
+@media screen and (max-width: 600px) {
     .elements{
         margin-bottom: 48px;
-        grid-template-columns: repeat(1, 1fr);
+        grid-template-columns: repeat(1, minmax(min-content, max-content));
         grid-template-areas: 
         "card"
         "card"
