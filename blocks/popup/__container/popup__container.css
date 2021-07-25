@@ -4,9 +4,7 @@
     width: 470px;
     height: 370px;
     z-index: 3;
-    position: fixed;
-    align-self: center;
-
+    margin-top: 150px;
 }
 
 @media screen and (max-width: 490px) {
@@ -14,5 +12,6 @@
         width: 282px;
         height: 358px;
         flex-direction: column;
+        margin-top: 90px;
     }
   }

@@ -10,7 +10,7 @@
     background-color: #000;
     border: none;
     border-radius: 2px;
-    margin: 48px 36px 37px;
+    margin: 40px 36px 37px;
 }
 
 .popup__save-button:hover {
@@ -23,7 +23,7 @@
     .popup__save-button {
         height: 46px;
         width: 238px;
-        margin: 45px 22px 25px;
+        margin: 40px 22px 25px;
         font-size: 14px;
         line-height: 17px;
     }

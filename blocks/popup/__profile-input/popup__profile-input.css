@@ -1,8 +1,8 @@
 .popup__profile-input {
     margin: 30px 36px 0;
     padding: 0;
+    padding-bottom: 13px;
     min-width: 358px;
-    min-height: 27px;
     border: none;
     border-bottom: 1px solid #545454;
     font-style: normal;
@@ -17,5 +17,6 @@
     .popup__profile-input {
         min-width: 238px;
         margin: 30px 22px 0;
+        padding-bottom: 11px;
     }
   }

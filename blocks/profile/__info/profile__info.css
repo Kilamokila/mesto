@@ -1,13 +1,11 @@
 .profile__info{
     display: grid;
-    gap: 16px 18px;
     max-width: 336px;
-    max-height: 73px;
     grid-template-columns: repeat(2, auto);
     grid-template-rows: repeat(2, auto);
     grid-template-areas:
         "name button"
-        "discription .";
+        "description .";
 }
 
 @media screen and (max-width: 490px) {
