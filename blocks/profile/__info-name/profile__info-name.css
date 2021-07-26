@@ -7,8 +7,8 @@
     grid-area: name;
     margin: 0;
     align-self: end;
-    text-overflow: ellipsis;   
-    white-space: nowrap;   
+    text-overflow: ellipsis;
+    white-space: nowrap;
     overflow: hidden;
 }
 
