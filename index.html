@@ -11,21 +11,6 @@
 </head>
 <body class="body">
   <div class="page">
-    <div class="popup">
-      <div class="popup__container">
-        <button class="popup__container-exit-button"></button>
-        <div class="popup__container-profile-editor">
-          <h2 class="popup__container-header">Редактировать профиль</h2>
-          <form action="#" class="popup__profile-form">
-            <fieldset class="popup__profile-settings">
-              <input type="text" class="popup__profile-input popup__profile-input_name">
-              <input type="text" class="popup__profile-input popup__profile-input_description">
-              <button class="popup__save-button" type="submit">Сохранить</button>
-            </fieldset>
-          </form>
-        </div>
-      </div>
-    </div>
     <header class="header">
       <div class="header__logo"></div>
     </header>
@@ -36,59 +21,74 @@
         <div class="profile__info">
           <h1 class="profile__info-name">Сиджей</h1>
           <p class="profile__info-description">Исследователь Лос-Сантоса</p>
-          <button class="profile__edit-button"></button>
+          <button class="profile__edit-button" type="button"></button>
         </div>
-          <button class="profile__add-button"></button>
+          <button class="profile__add-button" type="button"></button>
       </div>
     </section>
     <section class="elements">
-      <div class="elements__card">
-        <img src="./images/grove_st  (1).jpg" alt="Гроув Стрит" class="elements__card-image">
+      <article class="element-card">
+        <img src="./images/grove_st.jpg" alt="Гроув Стрит" class="elements__card-image">
         <div class="elements__card-description">
           <h3 class="elements__place-name">Гроув Стрит</h3>
-          <button class="elements__like-button"></button>
+          <button class="elements__like-button" type="button"></button>
         </div>
-      </div>
-      <div class="elements__card">
-        <img src="./images/red_county (1).jpg" alt="Округ Рэд" class="elements__card-image">
+      </article>
+      <article class="element-card">
+        <img src="./images/red_county.jpg" alt="Округ Рэд" class="elements__card-image">
         <div class="elements__card-description">
           <h3 class="elements__place-name">Округ "Рэд"</h3>
-          <button class="elements__like-button"></button>
+          <button class="elements__like-button" type="button"></button>
         </div>
-      </div>
-      <div class="elements__card">
-        <img src="./images/back_o_beyond (1).jpg" alt="Бэк'о'Бейонд" class="elements__card-image">
+      </article>
+      <article class="element-card">
+        <img src="./images/back_o_beyond.jpg" alt="Бэк'о'Бейонд" class="elements__card-image">
         <div class="elements__card-description">
           <h3 class="elements__place-name">Бэк'о'Бейонд</h3>
-          <button class="elements__like-button"></button>
+          <button class="elements__like-button" type="button"></button>
         </div>
-      </div>
-      <div class="elements__card">
-        <img src="./images/karma_chips  (1).jpg" alt="Карма" class="elements__card-image">
+      </article>
+      <article class="element-card">
+        <img src="./images/karma_chips.jpg" alt="Карма" class="elements__card-image">
         <div class="elements__card-description">
           <h3 class="elements__place-name">"Фишки" кармы</h3>
-          <button class="elements__like-button"></button>
+          <button class="elements__like-button" type="button"></button>
         </div>
-      </div>
-      <div class="elements__card">
-        <img src="./images/shootgun (1).jpg" alt="Шутган" class="elements__card-image">
+      </article>
+      <article class="element-card">
+        <img src="./images/shootgun.jpg" alt="Шутган" class="elements__card-image">
         <div class="elements__card-description">
           <h3 class="elements__place-name">Переднее пассажирское</h3>
-          <button class="elements__like-button"></button>
+          <button class="elements__like-button" type="button"></button>
         </div>
-      </div>
-      <div class="elements__card">
-        <img src="./images/wasted (1).jpg" alt="Потрачено" class="elements__card-image">
+      </article>
+      <article class="element-card">
+        <img src="./images/wasted.jpg" alt="Потрачено" class="elements__card-image">
         <div class="elements__card-description">
           <h3 class="elements__place-name">Потрачено</h3>
-          <button class="elements__like-button"></button>
+          <button class="elements__like-button" type="button"></button>
         </div>
-      </div> 
+      </article> 
     </section>
   </main>  
   <footer class="footer">
     <p class="footer__copyright">© 2021 Mesto Russia</p>
   </footer>
+  <div class="popup">
+    <div class="popup__container">
+      <button class="popup__container-exit-button" type="button"></button>
+      <div class="popup__container-profile-editor">
+        <h2 class="popup__container-header">Редактировать профиль</h2>
+        <form action="#" class="popup__profile-form" method="GET" name="formElement">
+          <fieldset class="popup__profile-settings">
+            <input type="text" class="popup__profile-input popup__profile-input_type_name">
+            <input type="text" class="popup__profile-input popup__profile-input_type_description">
+            <button class="popup__save-button" type="submit">Сохранить</button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
 <script src="./script/script.js"></script>
 </body>
