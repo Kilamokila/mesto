@@ -37,4 +37,4 @@
  
 ***
  
-ссылка на проект: https://kilamokila.github.io/mesto/index.html
+ссылка на проект: https://kilamokila.github.io/mesto
