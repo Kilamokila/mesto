@@ -1,5 +1,6 @@
 .elements__card-image {
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
+    max-width: 282px;
     border-radius: 10px 10px 0 0;
 }

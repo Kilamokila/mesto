@@ -3,20 +3,20 @@
     gap: 20px 17px;
     margin-bottom: 66px;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, auto);
-    grid-template-areas:
+/*     grid-template-rows: repeat(2, auto); */
+/*     grid-template-areas:
         "card card card"
-        "card card card";
+        "card card card"; */
 }
 
 @media screen and (max-width: 900px) {
     .elements{
         justify-content: center;
         grid-template-columns: repeat(2, minmax(min-content, max-content));
-        grid-template-areas: 
+/*         grid-template-areas: 
         "card card"
         "card card"
-        "card card";
+        "card card"; */
     }
   }
 
@@ -24,12 +24,12 @@
     .elements{
         margin-bottom: 48px;
         grid-template-columns: repeat(1, minmax(min-content, max-content));
-        grid-template-areas: 
+/*         grid-template-areas: 
         "card"
         "card"
         "card"
         "card"
         "card"
-        "card";
+        "card"; */
     }
   }

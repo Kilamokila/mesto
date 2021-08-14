@@ -8,6 +8,8 @@
     background-position: center;
     background-size: 32px;
     align-self: flex-end;
+    margin-right: -40px;
+    margin-bottom: 5px;
 }
 
 .popup__container-exit-button:hover {
@@ -23,5 +25,6 @@
         background-size: 20px;
         align-self: flex-end;
         margin-bottom: 16px;
+        margin-right: 0px;
     }
-  }
+  } 
