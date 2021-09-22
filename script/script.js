@@ -20,20 +20,16 @@ const elementsSection = page.querySelector('.elements');
 const popupFullSizePhoto = page.querySelector('.popup__fullsize-photo');
 const popupPhotoTitle = page.querySelector('.popup__photo-title');
 
-const openPopups = (popup) => {
+const openPopup = (popup) => {
   popup.classList.add('popup_opened');
 } 
 
-const closePopups = (popup) => {
+const closePopup = (popup) => {
  popup.classList.remove('popup_opened');
 }
 
-const savePopup = () => {popups.forEach((popup) => {
-  closePopups(popup);
-})}
-
 const closeCurrentPopup = (evt) => {
-  savePopup(evt.target.closest('.popup'))
+  closePopup(evt.target.closest('.popup'))
 }
 
 const returnNewCard = (name, link) => {
@@ -42,17 +38,17 @@ const returnNewCard = (name, link) => {
   const newCardName = newCard.querySelector('.elements__place-name');
   const newCardLikeButton = newCard.querySelector('.elements__like-button');
   const newCardDeleteButton = newCard.querySelector('.elements__delete-button');
-  const likeTheCard = (evt) => {
+  const setCardLikeListener = (evt) => {
     evt.target.closest('.elements__like-button').classList.toggle('elements__like-button_active');
   };
-  const deleteTheCard = (evt) => {
+  const setCardDeleteListener = (evt) => {
     evt.target.closest('.element-card').remove();
   }
   newCardImage.setAttribute('src', link);
   newCardImage.setAttribute("alt", name);
   newCardName.textContent = name;
-  newCardLikeButton.addEventListener('click', likeTheCard);
-  newCardDeleteButton.addEventListener('click', deleteTheCard);
+  newCardLikeButton.addEventListener('click', setCardLikeListener);
+  newCardDeleteButton.addEventListener('click', setCardDeleteListener);
   newCardImage.addEventListener('click', () => viewCard(name, link));
   return(newCard);
 };
@@ -61,7 +57,7 @@ const viewCard = (name, link) => {
   popupFullSizePhoto.setAttribute("src", link);
   popupFullSizePhoto.setAttribute("alt", name);
   popupPhotoTitle.textContent = name;
-  openPopups(viewCardPopup);
+  openPopup(viewCardPopup);
 } 
 
 const addCard = (card) => {
@@ -79,11 +75,11 @@ const createCard = (evt) => {
     };
     addCard(cardToBeAdd);
     addCardForm.reset();
-    closePopups(editCardPopup);
+    closePopup(editCardPopup);
   }
 
 const openProfilePopup = () => {
-    openPopups(profilePopup);
+    openPopup(profilePopup);
     nameInput.value = profileName.textContent;
     jobInput.value = profileDescription.textContent;
 }
@@ -92,7 +88,7 @@ const editProfile = (evt) => {
     evt.preventDefault(); 
     profileName.textContent = nameInput.value;
     profileDescription.textContent = jobInput.value;
-    closePopups(profilePopup);
+    closePopup(profilePopup);
 }
 
 profileEditButton.addEventListener('click', openProfilePopup);
