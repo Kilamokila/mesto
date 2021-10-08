@@ -38,12 +38,13 @@ const setEventListeners = (formElement, object) => {// Функция, "наве
     const inputList = Array.from(formElement.querySelectorAll(object.inputSelector));// создаём массив из коллекции полей ввода форм
     const buttonElement = formElement.querySelector(object.submitButtonSelector);// находим кнопки
     inputList.forEach((inputElement) => {// "проходимся" по каждому полю ввода созданного массива
-      toggleButtonState(inputList, buttonElement)
+      toggleButtonState(inputList, buttonElement);
         inputElement.addEventListener('input', () => {// "навешиваем" слушатели события ввода элементов на каждое поле, которые:
             isValid(formElement, inputElement, object)// 1. проверяют поле на валидность после каждого введенного символа
             toggleButtonState(inputList, buttonElement);// 2. проверяют возможность изменения состояния кнопки, в зависимости от валидности 
         });
     });
+    toggleButtonState(inputList, buttonElement);
 };
 
 const enableValidation = (object) => {// Функция, подключающая валидацию всех форм на странице
@@ -57,3 +58,4 @@ const enableValidation = (object) => {// Функция, подключающа�
   };
 
   enableValidation(dataForValidation);
+  

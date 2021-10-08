@@ -33,16 +33,30 @@ const closeCurrentPopup = (evt) => {
   closePopup(evt.target.closest('.popup'));
 };
 
+/* const openPopup = (popup) => {
+  popup.classList.add('popup_opened');
+  document.addEventListener('keydown', () => escapePopup(event, popups));
+};
+ */
+
+/* function escapePopup (event, popups) {
+  popups.forEach((popup) => {
+    if ((event.key === 'Escape') && (popup.classList.contains('popup_opened'))) { Насколько правильна подобная реализация функциональности закрытия попапа?
+      closePopup(popup);
+    }
+  })
+} */
+
 function escapePopup (evt) {
-  const openedPopup = document.querySelector('.popup_opened');
   if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened');
     closePopup(openedPopup);
   }
 };
 
 function clickAndClosePopup (evt) {
   if (evt.target.classList.contains('popup_opened')) {
-      closePopup(evt.target);
+    closePopup(evt.target);
   }
 };
 
@@ -89,6 +103,7 @@ const createCard = (evt) => {
     };
     addCard(cardToBeAdd);
     addCardForm.reset();
+    enableValidation(dataForValidation);
     closePopup(editCardPopup);
   };
 
