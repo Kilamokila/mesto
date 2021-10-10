@@ -5,14 +5,13 @@ const profileDescription = page.querySelector('.profile__info-description');
 const profilePopup = document.getElementById('profile-popup');
 const editCardPopup = document.getElementById('edit-card-popup');
 const viewCardPopup = document.getElementById('view-card-popup');
+const popupCloseButtons = document.querySelectorAll('.popup__container-exit-button');
 const editProfileForm = document.getElementById('editProfileForm');
 const addCardForm = document.getElementById('addCardForm');
 const nameInput = page.querySelector('.popup__input_type_name');
 const jobInput = page.querySelector('.popup__input_type_description');
 const placeInput = page.querySelector('.popup__input_type_place');
-const linkInput = page.querySelector('.popup__input_type_link');
-const inputs = Array.from(page.querySelectorAll('.popup__input'));
-const createCardButton = page.querySelector('#create-card__button');
+const linkInput = page.querySelector('.popup__input_type_link')
 const cardAddButton = page.querySelector('.profile__card-add-button');
 const cardTemplate = page.querySelector('.elements__card-template');
 const elementsSection = page.querySelector('.elements');
@@ -30,10 +29,34 @@ const closePopup = (popup) => {
  document.removeEventListener('keydown', escapePopup);
 };
 
+const closeCurrentPopup = (evt) => {
+  closePopup(evt.target.closest('.popup'));
+};
+
+/* const openPopup = (popup) => {
+  popup.classList.add('popup_opened');
+  document.addEventListener('keydown', () => escapePopup(event, popups));
+};
+ */
+
+/* function escapePopup (event, popups) {
+  popups.forEach((popup) => {
+    if ((event.key === 'Escape') && (popup.classList.contains('popup_opened'))) { Насколько правильна подобная реализация функциональности закрытия попапа?
+      closePopup(popup);
+    }
+  })
+} */
+
 function escapePopup (evt) {
   if (evt.key === 'Escape') {
     const openedPopup = document.querySelector('.popup_opened');
     closePopup(openedPopup);
+  }
+};
+
+function clickAndClosePopup (evt) {
+  if (evt.target.classList.contains('popup_opened')) {
+    closePopup(evt.target);
   }
 };
 
@@ -78,9 +101,9 @@ const createCard = (evt) => {
       name: placeInput.value,
       link: linkInput.value
     };
-    elementsSection.prepend(returnNewCard(cardToBeAdd.name, cardToBeAdd.link));
+    addCard(cardToBeAdd);
     addCardForm.reset();
-    toggleButtonState(inputs, createCardButton);
+    enableValidation(dataForValidation);
     closePopup(editCardPopup);
   };
 
@@ -101,13 +124,9 @@ profileEditButton.addEventListener('click', openProfilePopup);
 editProfileForm.addEventListener('submit', editProfile)
 cardAddButton.addEventListener('click', () => openPopup(editCardPopup)); 
 addCardForm.addEventListener('submit', createCard);
+popupCloseButtons.forEach((item) => {
+  item.addEventListener('click', closeCurrentPopup);
+});
 popups.forEach((popup) => {
-  popup.addEventListener('click', (evt) => {
-      if (evt.target.classList.contains('popup_opened')) {
-          closePopup(popup)
-      };
-      if (evt.target.classList.contains('popup__container-exit-button')) {
-        closePopup(popup)
-      };
-  });
+  popup.addEventListener('click', clickAndClosePopup);
 });
