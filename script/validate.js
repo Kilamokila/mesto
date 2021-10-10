@@ -44,7 +44,6 @@ const setEventListeners = (formElement, object) => {// Функция, "наве
             toggleButtonState(inputList, buttonElement);// 2. проверяют возможность изменения состояния кнопки, в зависимости от валидности 
         });
     });
-    toggleButtonState(inputList, buttonElement);
 };
 
 const enableValidation = (object) => {// Функция, подключающая валидацию всех форм на странице
