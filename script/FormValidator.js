@@ -1,31 +1,21 @@
-const dataForValidation = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__input-error'
-};
-
-const allForms = Array.from(document.querySelectorAll(dataForValidation.formSelector));
-
 class FormValidator {
-  constructor(data, formElement) {
+  constructor(validationConfig, formElement) {
     this._formElement = formElement;
-    this._data = data;
+    this._validationConfig = validationConfig;
   }
 
   _showInputError(inputElement) {
     const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
-    inputElement.classList.add(this._data.inputErrorClass);
+    inputElement.classList.add(this._validationConfig.inputErrorClass);
     errorElement.textContent = inputElement.validationMessage;
-    errorElement.classList.add(this._data.errorClass);
+    errorElement.classList.add(this._validationConfig.errorClass);
   }
 
   _hideInputError(inputElement) {
     const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
-    inputElement.classList.remove(this._data.inputErrorClass);
+    inputElement.classList.remove(this._validationConfig.inputErrorClass);
     errorElement.textContent = '';
-    errorElement.classList.remove(this._data.errorClass);
+    errorElement.classList.remove(this._validationConfig.errorClass);
   }
 
   _isValid(inputElement) {
@@ -34,14 +24,8 @@ class FormValidator {
       this._hideInputError(inputElement);
   }
 
-  _hasInvalidInput(inputList) {
-    return inputList.some((inputElement) => {
-      return !inputElement.validity.valid;
-    })
-  };
-
   _toggleButtonState() {
-    const buttonElement = this._formElement.querySelector(this._data.submitButtonSelector);
+    const buttonElement = this._formElement.querySelector(this._validationConfig.submitButtonSelector);
     const noInvalidInput = this._formElement.checkValidity();
     !noInvalidInput ?
       buttonElement.setAttribute('disabled', true) :
@@ -49,7 +33,7 @@ class FormValidator {
   }
 
   _setEventListeners() {
-    const inputList = Array.from(this._formElement.querySelectorAll(this._data.inputSelector));
+    const inputList = Array.from(this._formElement.querySelectorAll(this._validationConfig.inputSelector));
     inputList.forEach((inputElement) => {
       this._toggleButtonState();
       inputElement.addEventListener('input', () => {
@@ -59,6 +43,10 @@ class FormValidator {
     });
   };
 
+  changeButtonState() {
+    this._formElement.querySelector(this._validationConfig.submitButtonSelector).setAttribute('disabled', true);
+  }
+
   enableValidation() {
     this._formElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
@@ -67,13 +55,4 @@ class FormValidator {
   };
 };
 
-const pushValidation = () => {
-  allForms.forEach((form) => {
-    const validationClass = new FormValidator(dataForValidation, form);
-    validationClass.enableValidation();
-  })
-};
-
-pushValidation();
-
-export { dataForValidation, allForms, FormValidator };
+export { FormValidator };
