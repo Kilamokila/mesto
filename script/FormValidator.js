@@ -45,7 +45,7 @@ class FormValidator {
 
   changeButtonState() {
     this._formElement.querySelector(this._validationConfig.submitButtonSelector).setAttribute('disabled', true);
-  }
+  };
 
   enableValidation() {
     this._formElement.addEventListener('submit', (evt) => {
@@ -53,6 +53,14 @@ class FormValidator {
     });
     this._setEventListeners(this._formElement);
   };
+
+  resetValidationFields() {
+    const inputList = Array.from(this._formElement.querySelectorAll(this._validationConfig.inputSelector));
+    inputList.forEach((inputElement) => {
+      this._hideInputError(inputElement);
+    })
+  }
+
 };
 
 export { FormValidator };
