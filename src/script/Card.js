@@ -1,12 +1,8 @@
-import { openPopup } from '../utils/utils.js'
-
-const popupFullSizePhoto = document.querySelector('.popup__fullsize-photo');
-const popupPhotoTitle = document.querySelector('.popup__photo-title');
-
-class Card {
-  constructor(data, cardSelector) {
+export default class Card {
+  constructor({ data, cardSelector, handleCardClick }) {
     this._data = data;
     this._cardSelector = cardSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _returnTemplate() {
@@ -17,14 +13,6 @@ class Card {
     return cardTemplate;
   }
 
-  _viewCard() {
-    const viewCardPopup = document.getElementById('view-card-popup');
-    popupFullSizePhoto.setAttribute("src", this._data.link);
-    popupFullSizePhoto.setAttribute("alt", this._data.name);
-    popupPhotoTitle.textContent = this._data.name;
-    openPopup(viewCardPopup);
-  }
-
   _setEventListeners() {
     this._element.querySelector('.elements__like-button').addEventListener('click', (evt) => {
       evt.target.classList.toggle('elements__like-button_active');
@@ -33,19 +21,17 @@ class Card {
       evt.target.closest('.element-card').remove();
     });
     this._element.querySelector('.elements__card-image').addEventListener('click', () => {
-      this._viewCard()
+      this._handleCardClick()
     });
   }
 
   returnNewCard() {
     this._element = this._returnTemplate();
     this._element.querySelector('.elements__place-name').textContent = this._data.name;
-    const cardImgae = this._element.querySelector('.elements__card-image');
-    cardImgae.setAttribute('src', this._data.link);
-    cardImgae.setAttribute('alt', this._data.name);
+    const cardImage = this._element.querySelector('.elements__card-image');
+    cardImage.setAttribute('src', this._data.link);
+    cardImage.setAttribute('alt', this._data.name);
     this._setEventListeners()
     return this._element;
   }
 }
-
-export { Card };
