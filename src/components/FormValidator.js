@@ -2,6 +2,8 @@ export default class FormValidator {
   constructor(validationConfig, formElement) {
     this._formElement = formElement;
     this._validationConfig = validationConfig;
+    this._inputList = Array.from(this._formElement.querySelectorAll(this._validationConfig.inputSelector));
+    this._buttonElement = this._formElement.querySelector(this._validationConfig.submitButtonSelector);
   }
 
   _showInputError(inputElement) {
@@ -25,16 +27,14 @@ export default class FormValidator {
   }
 
   _toggleButtonState() {
-    const buttonElement = this._formElement.querySelector(this._validationConfig.submitButtonSelector);
     const noInvalidInput = this._formElement.checkValidity();
     !noInvalidInput ?
-      buttonElement.setAttribute('disabled', true) :
-      buttonElement.removeAttribute('disabled');
+      this._buttonElement.setAttribute('disabled', true) :
+      this._buttonElement.removeAttribute('disabled');
   }
 
   _setEventListeners() {
-    const inputList = Array.from(this._formElement.querySelectorAll(this._validationConfig.inputSelector));
-    inputList.forEach((inputElement) => {
+    this._inputList.forEach((inputElement) => {
       this._toggleButtonState();
       inputElement.addEventListener('input', () => {
         this._isValid(inputElement);
@@ -44,19 +44,18 @@ export default class FormValidator {
   };
 
   changeButtonState() {
-    this._formElement.querySelector(this._validationConfig.submitButtonSelector).setAttribute('disabled', true);
+    this._buttonElement.setAttribute('disabled', true);
   };
 
   enableValidation() {
     this._formElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
     });
-    this._setEventListeners(this._formElement);
+    this._setEventListeners();
   };
 
   resetValidationFields() {
-    const inputList = Array.from(this._formElement.querySelectorAll(this._validationConfig.inputSelector));
-    inputList.forEach((inputElement) => {
+    this._inputList.forEach((inputElement) => {
       this._hideInputError(inputElement);
     })
   }

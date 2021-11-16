@@ -1,10 +1,10 @@
 import '../pages/index.css';
-import Card from './Card.js';
-import FormValidator from './FormValidator.js';
-import PopupWithForm from './PopupWithForm.js';
-import PopupWithImage from './PopupWithImage.js'
-import UserInfo from './UserInfo.js';
-import Section from './Section.js';
+import Card from '../components/Card.js'
+import FormValidator from '../components/FormValidator.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithImage from '../components/PopupWithImage.js'
+import UserInfo from '../components/UserInfo.js';
+import Section from '../components/Section.js';
 import {
     validationConfig,
     initialCards,
@@ -26,23 +26,25 @@ const addCardFormValidator = new FormValidator(validationConfig, addCardForm);
 const editProfileFormValidator = new FormValidator(validationConfig, editProfileForm);
 //экземпляр для отображения информации о профиле
 const userInfo = new UserInfo({
-    userNameSelector: profileName,
-    userDescriptionSelector: profileDescription
+    userName: profileName,
+    userDescription: profileDescription
 });
-userInfo.getUserInfo();
+const defaulInfo = userInfo.getUserInfo();
+userInfo.setUserInfo(defaulInfo);
+
+const viewCard = new PopupWithImage(popupImage);
+viewCard.setEventListeners();
 
 /* Функция принимает объект с данными в виде параметра
 и возвращает экземляр карточки с экземпляром попапа, соответствующего 
 её ссылке на изображение. Возвращаемая карточка обладает функционалом
 отметки лайка, удаления и открытия фото через связанный попап */
 const getCard = (data) => {
-    const viewCard = new PopupWithImage({ data: data }, popupImage)
     const newCard = new Card({
         data: data,
         cardSelector: '.elements__card-template',
         handleCardClick: () => {
-            viewCard.open();
-            viewCard.setEventListeners();
+            viewCard.open(data);
         }
     }).returnNewCard();
     return newCard;
@@ -66,10 +68,9 @@ const popupCardForm = new PopupWithForm(
     popupEditCard, {
     submitFormCallback: (cardData) => {
         const cardToBeAdd = getCard(cardData);
-        templateSection.prepend(cardToBeAdd);
+        cardSection.addItem(cardToBeAdd);
         addCardFormValidator.changeButtonState();
     },
-    form: addCardForm,
     resetValidationFields: () => addCardFormValidator.resetValidationFields()
 })
 
@@ -81,7 +82,6 @@ const popupProfileForm = new PopupWithForm(
         userInfo.setUserInfo(userData);
         editProfileFormValidator.changeButtonState();
     },
-    form: editProfileForm,
     resetValidationFields: () => editProfileFormValidator.resetValidationFields()
 })
 
