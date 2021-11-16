@@ -8,7 +8,7 @@ export default class PopupWithImage extends Popup {
     }
 
     open(data) {
-        super.open(data);
+        super.open();
         this._popupFullSizePhoto.setAttribute("src", data.link);
         this._popupFullSizePhoto.setAttribute("alt", data.name);
         this._popupPhotoTitle.textContent = data.name;
