@@ -15,15 +15,13 @@
       </header>
       <main class="content">
         <section class="profile">
-          <img
-            src="<%=require('./images/Portrait_Placeholder.png')%>"
-            alt="Аватар"
-            class="profile__avatar"
-          />
+          <a class="profile__image-link">
+            <img src=" " alt="Аватар" class="profile__avatar" />
+          </a>
           <div class="profile__container">
             <div class="profile__info">
-              <h1 class="profile__info-name">Имя</h1>
-              <p class="profile__info-description">Описание профиля</p>
+              <h1 class="profile__info-name"></h1>
+              <p class="profile__info-description"></p>
               <button class="profile__edit-button" type="button"></button>
             </div>
             <button class="profile__card-add-button" type="button"></button>
@@ -42,7 +40,10 @@
               </div>
               <div class="elements__card-description">
                 <h3 class="elements__place-name">Архыз</h3>
-                <button class="elements__like-button" type="button"></button>
+                <div class="elements__like">
+                  <button class="elements__like-button" type="button"></button>
+                  <p class="elements__like-counter"></p>
+                </div>
               </div>
             </article>
           </template>
@@ -51,6 +52,57 @@
       <footer class="footer">
         <p class="footer__copyright">© 2021 Mesto Russia</p>
       </footer>
+      <div class="popup" id="submit-popup">
+        <div class="popup__container">
+          <button class="popup__container-exit-button" type="button"></button>
+          <div class="popup__container-editor">
+            <h2 class="popup__container-header">Вы уверены?</h2>
+            <form
+              action="#"
+              class="popup__form"
+              method="GET"
+              id="submitForm"
+              novalidate
+            >
+              <button class="popup__button" type="submit">Да</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="popup" id="avatar-popup">
+        <div class="popup__container">
+          <button class="popup__container-exit-button" type="button"></button>
+          <div class="popup__container-editor">
+            <h2 class="popup__container-header">Обновить аватар</h2>
+            <form
+              action="#"
+              class="popup__form"
+              method="GET"
+              id="editAvatarForm"
+              novalidate
+            >
+              <fieldset class="popup__form-settings">
+                <input
+                  name="avatar"
+                  id="link-input"
+                  type="url"
+                  class="popup__input popup__input_type_link"
+                  placeholder="Ссылка на аватар"
+                  required
+                />
+                <span class="link-input-error"></span>
+                <button
+                  id="save-avatar__button"
+                  class="popup__button"
+                  type="submit"
+                >
+                  Сохранить
+                </button>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      </div>
       <div class="popup" id="profile-popup">
         <div class="popup__container">
           <button class="popup__container-exit-button" type="button"></button>
@@ -65,7 +117,7 @@
             >
               <fieldset class="popup__form-settings">
                 <input
-                  name="userName"
+                  name="name"
                   id="name-input"
                   type="text"
                   class="popup__input popup__input_type_name"
@@ -75,7 +127,7 @@
                 />
                 <span class="name-input-error"></span>
                 <input
-                  name="description"
+                  name="about"
                   id="description-input"
                   type="text"
                   class="popup__input popup__input_type_description"
