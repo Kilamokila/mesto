@@ -16,7 +16,16 @@ export default class PopupWithSubmit extends Popup {
         this._form.addEventListener('submit', (evt) => {
             evt.preventDefault();
             this._submitFormCallback();
-            this.close();
         });
     }
+
+    changeButtonText(onLoad) {
+        if (onLoad) {
+            this._submitButton.textContent = "Uno momento..."
+        } else {
+            this._submitButton.textContent = this._submitTextDefault;
+        }
+
+    }
+
 }

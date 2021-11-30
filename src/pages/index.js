@@ -12,6 +12,8 @@ import {
     profileEditButton,
     editProfileForm,
     addCardForm,
+    nameInput,
+    jobInput,
     editAvatarForm,
     profileDescription,
     profileName,
@@ -35,7 +37,8 @@ const avatarFormValidator = new FormValidator(validationConfig, editAvatarForm);
 
 const userInfo = new UserInfo({
     name: profileName,
-    about: profileDescription
+    about: profileDescription,
+    avatar: profileAvatar,
 });
 
 const viewCard = new PopupWithImage(popupImage);
@@ -49,22 +52,25 @@ const api = new Api({
     }
 })
 
-let userID = null;
+let userID = null
 
 Promise.all([api.getCardsData(), api.getUserData()])
     .then(([cardsData, userData]) => {
+        const newUserInfo = userInfo.getUserInfo(userData);
+        userInfo.setUserAvatar(newUserInfo);
+        userInfo.setUserInfo(newUserInfo);
         userID = userData._id;
-        userInfo.setUserInfo(userData);
-        profileAvatar.setAttribute('src', userData.avatar)
         cardSection.renderItems(cardsData);
     })
     .catch(err => console.log(err));
+
 const popupWithSubmit = new PopupWithSubmit(popupSubmit);
+
 /* Функция принимает объект с данными в виде параметра
 и возвращает экземляр карточки с экземпляром попапа, соответствующего 
 её ссылке на изображение. Возвращаемая карточка обладает функционалом
 отметки лайка, удаления и открытия фото через связанный попап */
-const getCard = (data) => {
+const generateCard = (data) => {
     const newCard = new Card({
         data: { ...data, currentUserID: userID },
         cardSelector: '.elements__card-template',
@@ -83,10 +89,14 @@ const getCard = (data) => {
         handleDeleteCard: (newCard) => {
             popupWithSubmit.open();
             popupWithSubmit.setActionOfSubmit(() => {
+                popupWithSubmit.changeButtonText(true)
                 api.deleteCard(newCard.id)
-                    .then(() => newCard.deleteCurrentCard())
-                    .catch(err => console.log(err));
-                popupWithSubmit.close()
+                    .then(() => {
+                        newCard.deleteCurrentCard(newCard)
+                        popupWithSubmit.close()
+                    })
+                    .catch(err => console.log(err))
+                    .finally(() => popupWithSubmit.changeButtonText(false))
             })
         }
     }).returnNewCard();
@@ -95,7 +105,7 @@ const getCard = (data) => {
 
 //экземпляр вносит карточки в разметку на основе переданных ему данных о ссылках и наименованиях
 const cardSection = new Section({
-    renderer: (item) => cardSection.addItem(getCard(item)),
+    renderer: (item) => cardSection.addItem(generateCard(item)),
 }, templateSection)
 
 //функция подключает валидацию доступных форм на странице
@@ -110,7 +120,10 @@ const popupAvatarForm = new PopupWithForm(
     submitFormCallback: (userAvatarLink) => {
         popupAvatarForm.changeButtonText(true);
         api.patchAvatar(userAvatarLink)
-            .then(() => profileAvatar.setAttribute('src', userAvatarLink.avatar))
+            .then(() => {
+                userInfo.setUserAvatar(userAvatarLink)
+                popupAvatarForm.close()
+            })
             .catch(err => console.log(err))
             .finally(() => popupAvatarForm.changeButtonText(false))
     },
@@ -124,7 +137,10 @@ const popupCardForm = new PopupWithForm(
     submitFormCallback: (cardData) => {
         popupCardForm.changeButtonText(true);
         api.postCard(cardData)
-            .then((cardData) => cardSection.addItem(getCard(cardData)))
+            .then((cardData) => {
+                cardSection.addItem(generateCard(cardData))
+                popupCardForm.close()
+            })
             .catch(err => console.log(err))
             .finally(() => popupCardForm.changeButtonText(false));
         addCardFormValidator.changeButtonState()
@@ -140,7 +156,7 @@ const popupProfileForm = new PopupWithForm(
         popupProfileForm.changeButtonText(true);
         userInfo.setUserInfo(userData);
         api.patchUserData(userData)
-            .then()
+            .then(() => popupProfileForm.close())
             .catch(err => console.log(err))
             .finally(() => popupProfileForm.changeButtonText(false));
         editProfileFormValidator.changeButtonState();
@@ -155,4 +171,8 @@ popupProfileForm.setEventListeners();
 popupAvatarForm.setEventListeners();
 editAvatar.addEventListener('click', () => popupAvatarForm.open());
 cardAddButton.addEventListener('click', () => popupCardForm.open());
-profileEditButton.addEventListener('click', () => popupProfileForm.open());
+profileEditButton.addEventListener('click', () => {
+    popupProfileForm.open()
+    nameInput.value = profileName.textContent;
+    jobInput.value = profileDescription.textContent;
+});

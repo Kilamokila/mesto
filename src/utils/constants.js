@@ -8,7 +8,6 @@ export const profileEditButton = document.querySelector('.profile__edit-button')
 export const editProfileForm = document.getElementById('editProfileForm');
 export const addCardForm = document.getElementById('addCardForm');
 export const editAvatarForm = document.getElementById('editAvatarForm');
-export const submitForm = document.getElementById('submitForm');
 export const popupImage = document.getElementById('view-card-popup');
 export const popupEditProfile = document.getElementById('profile-popup');
 export const popupEditCard = document.getElementById('edit-card-popup');
